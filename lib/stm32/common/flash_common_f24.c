@@ -25,6 +25,7 @@
 /**@{*/
 
 #include <libopencm3/stm32/flash.h>
+#include <string.h>
 
 /*---------------------------------------------------------------------------*/
 /** @brief Set the Program Parallelism Size
@@ -204,10 +205,17 @@ was not properly erased.
 
 void flash_program(uint32_t address, const uint8_t *data, uint32_t len)
 {
-	/* TODO: Use dword and word size program operations where possible for
-	 * turbo speed.
-	 */
 	uint32_t i;
+	if ((address & 0x3) != 0) {
+		for (; (address & 0x3) && len; len--, address++, data++) {
+			flash_program_byte(address, *data);
+		}
+	}
+	for (; len >= 4; len -= 4, address += 4, data += 4) {
+		uint32_t d;
+		memcpy(&d, data, sizeof(d));
+		flash_program_word(address, d);
+	}
 	for (i = 0; i < len; i++) {
 		flash_program_byte(address+i, data[i]);
 	}
