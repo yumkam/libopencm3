@@ -122,14 +122,19 @@
 
 /* --- RCC_CFGR values ----------------------------------------------------- */
 
-/* MCOPRE */
+/** @defgroup rcc_cfgr_pdf MCOPRE Microcontroller clock output prescaler
+ @{*/
 #define RCC_CFGR_MCOPRE_DIV1	    0
 #define RCC_CFGR_MCOPRE_DIV2	    1
 #define RCC_CFGR_MCOPRE_DIV4	    2
 #define RCC_CFGR_MCOPRE_DIV8	    3
 #define RCC_CFGR_MCOPRE_DIV16	    4
+/**@}*/
+#define RCC_CFGR_MCOPRE_SHIFT		28
+#define RCC_CFGR_MCOPRE_MASK		0x7
 
-/* MCO: Microcontroller clock output */
+/** @defgroup rcc_cfgr_pdf MCO Microcontroller clock output selection
+ @{*/
 #define RCC_CFGR_MCO_NOCLK			0x0
 #define RCC_CFGR_MCO_SYSCLK			0x1
 #define RCC_CFGR_MCO_HSI16			0x2
@@ -139,6 +144,7 @@
 #define RCC_CFGR_MCO_LSI			0x6
 #define RCC_CFGR_MCO_LSE			0x7
 #define RCC_CFGR_MCO_HSI48			0x8
+/**@}*/
 #define RCC_CFGR_MCO_SHIFT			24
 #define RCC_CFGR_MCO_MASK			0xf
 
